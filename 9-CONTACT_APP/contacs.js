@@ -42,4 +42,4 @@ const simpanContact = (nama, email, noHP) => {
   rl.close();
 };
 
-module.exports = { tulisPertanyaan, simpanContact };
+module.exports = { tulisPertanyaan, simpanContact, cl };
