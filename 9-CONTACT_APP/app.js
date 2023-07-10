@@ -1,44 +1,46 @@
 const yargs = require("yargs");
-const { tulisPertanyaan, simpanContact, cl } = require("./contacts");
+const {
+  tulisPertanyaan,
+  simpanContact,
+  cl,
+  listContact,
+} = require("./contacts");
 
-yargs.command({
-  command: "add",
-  describe: "Menambahkan contact baru",
-  builder: {
-    nama: {
-      describe: "Nama lengkap",
-      demandOption: true,
-      type: "string",
+yargs
+  .command({
+    command: "add",
+    describe: "Menambahkan contact baru",
+    builder: {
+      nama: {
+        describe: "Nama lengkap",
+        demandOption: true,
+        type: "string",
+      },
+      email: {
+        describe: "Email",
+        demandOption: false,
+        type: "string",
+      },
+      noHP: {
+        describe: "Nomor HP",
+        demandOption: true,
+        type: "string",
+      },
     },
-    email: {
-      describe: "Email",
-      demandOption: false,
-      type: "string",
+    handler(argv) {
+      simpanContact(argv.nama, argv.email, argv.noHP);
     },
-    noHP: {
-      describe: "Nomor HP",
-      demandOption: true,
-      type: "string",
-    },
-  },
-  handler(argv) {
-    simpanContact(argv.nama, argv.email, argv.noHP);
-  },
-});
+  })
+  .demandCommand();
+
+// Menampilkan daftar nama & no hp kontak
 
 yargs.command({
   command: "list",
-  describe: "Melihat kontak yang tersedia.",
+  describe: "Menampilkan kontak yang tersedia",
+  handler() {
+    listContact();
+  },
 });
 
 yargs.parse();
-
-// const main = async () => {
-//   const nama = await tulisPertanyaan("Masukkan Nama Anda: ");
-//   const email = await tulisPertanyaan("Masukkan Email Anda: ");
-//   const noHP = await tulisPertanyaan("Masukkan nomor HP Anda: ");
-
-//   simpanContact(nama, email, noHP);
-// };
-
-// main();
