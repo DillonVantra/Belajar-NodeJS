@@ -1,10 +1,1 @@
-[
-  { "nama": "Sang", "email": "sang@gmail.com", "noHP": "12341" },
-  { "nama": "bang", "email": "bang@gmail.com", "noHP": "12342" },
-  { "nama": "Pucci", "email": "pucci@gmail.com", "noHP": "081234567" },
-  { "nama": "Dio", "email": "meliodas@gmail.com", "noHP": "0812345" },
-  { "nama": "Yoyo", "noHP": "0812345" },
-  { "nama": "Endy", "email": "swda@gma", "noHP": "0812345" },
-  { "nama": "Wowi", "noHP": "0812345" },
-  { "nama": "Haise", "noHP": "082234567891" }
-]
+[{"nama":"Sang","email":"sang@gmail.com","noHP":"12341"},{"nama":"bang","email":"bang@gmail.com","noHP":"12342"},{"nama":"Pucci","email":"pucci@gmail.com","noHP":"081234567"},{"nama":"Dio","email":"meliodas@gmail.com","noHP":"0812345"},{"nama":"Yoyo","noHP":"0812345"},{"nama":"Endy","email":"swda@gma","noHP":"0812345"},{"nama":"Wowi","noHP":"0812345"}]

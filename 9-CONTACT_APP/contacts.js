@@ -1,8 +1,13 @@
 const { dir } = require("console");
-const cl = (cl) => console.log(cl);
 const fs = require("fs");
 const chalk = require("chalk");
 const validator = require("validator");
+
+// global function
+const cl = (cl) => console.log(cl);
+const warning = (e) => chalk.red.inverse.bold(e);
+const info = (e) => chalk.cyan.inverse.bold(e);
+const success = (e) => chalk.green.inverse(e);
 
 // membuat folder data jika belum ada
 const dirPath = "./data";
@@ -29,20 +34,20 @@ const simpanContact = (nama, email, noHP) => {
   // Cek duplikat
   const duplikat = contacts.find((contact) => contact.nama === nama);
   if (duplikat) {
-    cl(chalk.red.inverse.bold("Kontak sudah terdaftar, gunakan nama lain!"));
+    cl(warning("Kontak sudah terdaftar, gunakan nama lain!"));
     return false;
   }
 
   // cek email
   if (email) {
     if (!validator.isEmail(email)) {
-      cl(chalk.red.inverse.bold("Email tidak valid!"));
+      cl(warning("Email tidak valid!"));
     }
   }
 
   // cek nomor HP
   if (!validator.isMobilePhone(noHP, "id-ID")) {
-    cl(chalk.red.inverse.bold("Nomor HP tidak valid!"));
+    cl(warning("Nomor HP tidak valid!"));
   }
 
   contacts.push(contact);
@@ -55,10 +60,52 @@ const simpanContact = (nama, email, noHP) => {
 const listContact = () => {
   const contacts = loadContact();
 
-  cl(chalk.cyan.inverse.bold("Daftar Kontak :"));
+  cl(info("Daftar Kontak :"));
   contacts.forEach((contact, i) => {
     cl(`${i + 1}. ${contact.nama} - ${contact.noHP}`);
   });
 };
 
-module.exports = { simpanContact, cl, listContact };
+const detailContact = (nama) => {
+  const contacts = loadContact();
+
+  const contact = contacts.find(
+    (contact) => contact.nama.toLowerCase() == nama.toLowerCase()
+  );
+
+  if (!contact) {
+    cl(warning(`${nama} tidak ditemukan!`));
+    return false;
+  }
+
+  cl(info(contact.nama));
+  cl(contact.noHP);
+  if (contact.email) {
+    cl(contact.email);
+  }
+};
+
+const deleteContact = (nama) => {
+  const contacts = loadContact();
+
+  const newContacts = contacts.filter((contact) => {
+    return contact.nama.toLowerCase() !== nama.toLowerCase();
+  });
+
+  if (contacts.length === newContacts.length) {
+    cl(warning(`${nama} tidak ditemukan!`));
+    return false;
+  }
+
+  fs.writeFileSync("data/contacts.json", JSON.stringify(newContacts));
+
+  cl(success(`Data kontak ${nama} berhasil dihapus!`));
+};
+
+module.exports = {
+  simpanContact,
+  cl,
+  listContact,
+  detailContact,
+  deleteContact,
+};
