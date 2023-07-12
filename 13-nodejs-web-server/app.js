@@ -1,8 +1,21 @@
 const http = require("http");
+const fs = require("fs");
 
 const cl = (cl) => console.log(cl);
 
 const port = 3000;
+
+const renderHTML = (path, res) => {
+  fs.readFile(path, (err, data) => {
+    if (err) {
+      res.writeHead(404);
+      res.write("Error: file not found");
+    } else {
+      res.write(data);
+    }
+    res.end();
+  });
+};
 
 http
   .createServer((req, res) => {
@@ -11,16 +24,26 @@ http
     });
 
     const url = req.url;
-    if (url === "/about") {
-      res.write("<h2>Halaman About</h2>");
-      res.end();
-    } else if (url === "/contact") {
-      res.write("<h2>Halaman Contact</h2>");
-      res.end();
-    } else {
-      res.write("<h2>Hello World!</h2>");
-      res.end();
+
+    switch (url) {
+      case "./about":
+        renderHTML("./about.html", res);
+        break;
+      case "./contact":
+        renderHTML("./contact.html", res);
+        break;
+      default:
+        renderHTML("./index.html", res);
+        break;
     }
+
+    // if (url === "/about") {
+    //   renderHTML("./about.html", res);
+    // } else if (url === "/contact") {
+    //   renderHTML("./contact.html", res);
+    // } else {
+    //   renderHTML("./index.html", res);
+    // }
   })
   .listen(port, () => {
     cl(`server is listening on port ${port}...`);
