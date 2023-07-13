@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NodeJS Web Server</title>
+    <title><%= title %></title>
   </head>
   <body>
     <h1>Hello World!</h1>
@@ -22,5 +22,18 @@
         <a href="/product/10">Product</a>
       </li>
     </ul>
+    <h2>Halo <%= nama %></h2>
+
+    <h4>Daftar Mahasiswa</h4>
+
+    <% if (mahasiswa.length == 0) { %>
+    <p>Data mahasiswa masih kosong</p>
+
+    <% } else { mahasiswa.forEach(mhs => { %>
+    <ul>
+      <li>Nama : <%= mhs.nama %></li>
+      <li>Email : <%= mhs.email %></li>
+    </ul>
+    <% })} %>
   </body>
 </html>
