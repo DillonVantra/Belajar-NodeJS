@@ -1,9 +1,11 @@
 const express = require("express");
+const expressLayouts = require("express-ejs-layouts");
 const app = express();
 const port = 3000;
 
 // gunakan ejs
 app.set("view engine", "ejs");
+app.use(expressLayouts);
 
 const cl = (cl) => console.log(cl);
 
@@ -17,15 +19,22 @@ app.get("/", (req, res) => {
     nama: "Dillon",
     title: "Halaman Home",
     mahasiswa,
+    layout: "layouts/main-layout",
   });
 });
 
 app.get("/about", (req, res) => {
-  res.render("about");
+  res.render("about", {
+    layout: "layouts/main-layout",
+    title: "Halaman About",
+  });
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact");
+  res.render("contact", {
+    layout: "layouts/main-layout",
+    title: "Halaman Contact",
+  });
 });
 
 app.get("/product/:id", (req, res) => {
