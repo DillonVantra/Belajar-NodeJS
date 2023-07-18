@@ -4,9 +4,6 @@
     "nohp": "0812345678",
     "email": "dillon@gmail.com"
   },
-  {
-    "nama": "Dwayne",
-    "nohp": "0812345678",
-    "email": "dwayne@gmail.com"
-  }
+  { "nama": "Dwayne", "nohp": "0812345678", "email": "dwayne@gmail.com" },
+  { "nama": "Dillon", "email": "dojirashua@gmail.com", "nohp": "081388006961" }
 ]

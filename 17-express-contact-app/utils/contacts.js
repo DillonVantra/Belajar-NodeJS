@@ -23,6 +23,18 @@ const loadContact = () => {
   return contacts;
 };
 
+// menuliskan / menimpa file contacts.json dengan data baru
+const saveContacts = (contacts) => {
+  fs.writeFileSync("data/contacts.json", JSON.stringify(contacts));
+};
+
+// menambah data contact baru
+const addContact = (contact) => {
+  const contacts = loadContact();
+  contacts.push(contact);
+  saveContacts(contacts);
+};
+
 // cari kontak berdasarkan nama
 const findContact = (nama) => {
   const contacts = loadContact();
@@ -33,4 +45,10 @@ const findContact = (nama) => {
   return contact;
 };
 
-module.exports = { loadContact, findContact };
+// cek nama yang duplikat
+const cekDuplikat = (nama) => {
+  const contacts = loadContact();
+  return contacts.find((contact) => contact.nama == nama);
+};
+
+module.exports = { loadContact, findContact, addContact, cekDuplikat };

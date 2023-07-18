@@ -1,0 +1,46 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="mb-4">Form Tambah Data Kontak</h2>
+
+      <% if (typeof errors != 'undefined') { %> <% } %>
+
+      <form method="post" action="/contact">
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama</label>
+          <input
+            name="nama"
+            type="text"
+            class="form-control"
+            id="nama"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            name="email"
+            type="email"
+            class="form-control"
+            id="email"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="nohp" class="form-label">No HP</label>
+          <input
+            name="nohp"
+            type="text"
+            class="form-control"
+            id="nohp"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Tambahkan</button>
+      </form>
+    </div>
+  </div>
+</div>
