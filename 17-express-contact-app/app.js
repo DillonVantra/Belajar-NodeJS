@@ -8,7 +8,6 @@ const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const { query, body, check, validationResult } = require("express-validator");
 const session = require("express-session");
-const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
 
 const app = express();
@@ -18,7 +17,6 @@ const cl = (cl) => console.log(cl);
 app.set("view engine", "ejs"); // gunakan ejs
 app.use(expressLayouts); // Third-party middleware
 app.use(express.static("public")); // Built-in middleware, untuk mengakses file static seperti gambar, video, dll
-app.use(cookieParser("secret"));
 app.use(
   session({
     cookie: { maxAge: 6000 },
