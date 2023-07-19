@@ -7,19 +7,27 @@ const {
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const { query, body, check, validationResult } = require("express-validator");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
 
 const app = express();
 const port = 3000;
 const cl = (cl) => console.log(cl);
 
-// gunakan ejs
-app.set("view engine", "ejs");
-
-// Third-party middleware
-app.use(expressLayouts);
-
-// Built-in middleware, untuk mengakses file static seperti gambar, video, dll
-app.use(express.static("public"));
+app.set("view engine", "ejs"); // gunakan ejs
+app.use(expressLayouts); // Third-party middleware
+app.use(express.static("public")); // Built-in middleware, untuk mengakses file static seperti gambar, video, dll
+app.use(cookieParser("secret"));
+app.use(
+  session({
+    cookie: { maxAge: 6000 },
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+app.use(flash());
 
 app.use(express.json());
 app.use(
@@ -55,6 +63,7 @@ app.get("/contact", (req, res) => {
     layout: "layouts/main-layout",
     title: "Halaman Contact",
     contacts,
+    msg: req.flash("msg"),
   });
 });
 
@@ -89,9 +98,12 @@ app.post(
         layout: "layouts/main-layout",
         errors: errors.array(),
       });
+    } else {
+      addContact(req.body);
+      // kirimkan flash message
+      req.flash("msg", "Data kontak berhasil ditambahkan!");
+      res.redirect("/contact");
     }
-    // addContact(req.body);
-    // res.redirect("/contact");
   }
 );
 
