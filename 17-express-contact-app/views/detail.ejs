@@ -17,7 +17,20 @@
             <%= contact.nohp %>
           </h6>
           <p class="card-text"><%= contact.email %></p>
-          <a href="/contact" class="card-link">&laquo; Kembali</a>
+          <a
+            href="/contact/edit/<%= contact.nama %>"
+            class="btn btn-info fw-bold text-light"
+            >edit</a
+          >
+          <a
+            href="/contact/delete/<%= contact.nama %>"
+            class="btn btn-danger fw-bold"
+            onclick="return confirm('Anda yakin ingin menghapus data ini?');"
+            >hapus</a
+          >
+          <a href="/contact" class="card-link d-block mt-3"
+            >&laquo; Kembali ke Daftar Kontak</a
+          >
         </div>
       </div>
       <% } %>
