@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/testing")
-  .then(() => console.log("Connected!"));
+  .then(() => console.log("Database connected!"));
 
 // // Menambah 1 document
 // const contact1 = new Contact({

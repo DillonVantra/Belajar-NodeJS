@@ -19,15 +19,25 @@
           <p class="card-text"><%= contact.email %></p>
           <a
             href="/contact/edit/<%= contact.nama %>"
-            class="btn btn-info fw-bold text-light"
+            class="btn btn-info fw-bold text-light badge"
             >edit</a
           >
-          <a
+          <!-- <a
             href="/contact/delete/<%= contact.nama %>"
             class="btn btn-danger fw-bold"
             onclick="return confirm('Anda yakin ingin menghapus data ini?');"
             >hapus</a
-          >
+          > -->
+          <form action="/contact?_method=DELETE" method="post" class="d-inline">
+            <input type="hidden" name="nama" value="<%= contact.nama %>" />
+            <button
+              type="submit"
+              class="btn btn-danger fw-bold badge"
+              onclick="return confirm('Anda yakin ingin menghapus data ini?');"
+            >
+              hapus
+            </button>
+          </form>
           <a href="/contact" class="card-link d-block mt-3"
             >&laquo; Kembali ke Daftar Kontak</a
           >
